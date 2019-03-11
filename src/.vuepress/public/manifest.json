@@ -1,0 +1,10 @@
+{
+  "short_name": "mathieutu",
+  "name": "mathieutu",
+  "start_url": ".",
+  "background_color": "#ded4d4",
+  "display": "standalone",
+  "description": "The website of Mathieu TUDISCO",
+  "theme_color": "#ded4d4",
+  "splash_pages": null
+}

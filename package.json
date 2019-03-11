@@ -1,0 +1,19 @@
+{
+    "name": "mathieutu.dev",
+    "version": "0.0.1",
+    "description": "Personal blog",
+    "author": "Mathieu TUDISCO",
+    "license": "MIT",
+    "devDependencies": {
+        "@vuepress/plugin-blog": "^1.0.0-alpha.44",
+        "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.44",
+        "@vuepress/plugin-pwa": "^1.0.0-alpha.44",
+        "date-fns": "^2.0.0-alpha.27",
+        "vuepress": "^1.0.0-alpha.44",
+        "vuepress-plugin-reading-time": "^0.1.1"
+    },
+    "scripts": {
+        "start": "vuepress dev src",
+        "build": "vuepress build src"
+    }
+}
