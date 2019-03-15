@@ -31,37 +31,30 @@ export default {
 
 
 <style lang="stylus">
-  .post {
-    .content {
-      max-width: var(--content-width);
+  .post
+    .content
+      max-width: var(--content-width)
 
-      &:not(.custom) {
-        > h1:first-child {
-          margin-bottom: 0 !important;
-        }
+      &:not(.custom)
+        > h1:first-child
+          margin-bottom: 0 !important
 
-        > *:first-child {
-          margin-top: 2rem;
-        }
-      }
+        /*> *:first-child */
+        /*  margin-top: 2rem*/
 
-      &.header {
-        margin-top: 2rem;
-      }
-    }
+      &.header
+        margin-top: 2rem
 
-    .date-container {
-      display: inline-block;
-      margin-top: 0.25rem;
-    }
+    .date-container
+      display: inline-block
+      margin-top: 0.25rem
 
-    .meta {
-      font-weight: 400;
-      font-size: 14px;
-      color: hsl(0, 0%, 60%);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-  }
+    .meta
+      font-weight: 400
+      font-size: 14px
+      color: hsl(0, 0%, 60%)
+      display: flex
+      justify-content: space-between
+      flex-wrap: wrap
+
 </style>
