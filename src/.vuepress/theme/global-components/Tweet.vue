@@ -1,5 +1,7 @@
 <template>
-  <div class="tweet" v-html="tweet" @click="onClick"/>
+  <div class="tweet">
+    <div v-html="tweet" @click="onClick" style="display: inline-block"/>
+  </div>
 </template>
 
 <script>
@@ -38,6 +40,8 @@ export default {
 
 <style lang="stylus">
   .tweet
+    display flex
+    justify-content center
     blockquote
       color initial
 
