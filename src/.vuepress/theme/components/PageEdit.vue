@@ -7,7 +7,7 @@
 <script>
 import { formatDistance } from 'date-fns';
 import { endingSlashRE, normalize, outboundRE } from '@vuepress/theme-default/util';
-import ExternalLink from './ExternalLink';
+import ExternalLink from '@theme/global-components/ExternalLink.vue';
 
 export default {
   name: 'PageEdit',

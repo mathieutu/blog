@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import ExternalLink from '@theme/components/ExternalLink.vue';
+import ExternalLink from '@theme/global-components/ExternalLink.vue';
 import Avatar from '@theme/global-components/Avatar.vue';
 
 export default {
