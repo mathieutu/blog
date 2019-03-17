@@ -16,10 +16,3 @@ export default {
   components: { LayoutWithBio, TagBadges }
 };
 </script>
-
-<style>
-.tags {
-  padding-left: 1.2em;
-}
-
-</style>
