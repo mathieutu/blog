@@ -31,30 +31,38 @@ export default {
 
 
 <style lang="stylus">
-  .post
-    .content
+  .post {
+    .content {
       max-width: var(--content-width)
 
-      &:not(.custom)
-        > h1:first-child
+      &:not(.custom) {
+        > h1:first-child {
           margin-bottom: 0 !important
+        }
+      }
 
-        /*> *:first-child */
-        /*  margin-top: 2rem*/
-
-      &.header
+      &.header {
         margin-top: 2rem
+      }
 
-    .date-container
+      img {
+        max-height 400px
+      }
+    }
+
+    .date-container {
       display: inline-block
       margin-top: 0.25rem
+    }
 
-    .meta
+    .meta {
       font-weight: 400
       font-size: 14px
       color: hsl(0, 0%, 60%)
       display: flex
       justify-content: space-between
       flex-wrap: wrap
+    }
+  }
 
 </style>

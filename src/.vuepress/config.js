@@ -17,11 +17,19 @@ module.exports = {
     'vuepress-plugin-reading-time',
     '@vuepress/last-updated',
     require('./plugins/lastCommit'),
+    ['@vuepress/container', {
+      type: 'center',
+      before: '<div style="display: flex; justify-content: center">',
+      after: '</div>',
+    }]
   ],
   head: [
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['link', { rel: 'shortcut icon', href: '/favicon.png' }],
   ],
+  markdown: {
+    linkify: true,
+  },
   themeConfig: {
     sidebar: false,
 
