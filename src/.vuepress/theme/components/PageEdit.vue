@@ -94,6 +94,12 @@ export default {
 
 <style lang="stylus">
   @require '~@vuepress/theme-default/styles/wrapper.styl'
+  .no-edit {
+    .page-edit {
+      display none
+    }
+  }
+
   .page-edit
     @extend $wrapper
     padding-top 1rem
