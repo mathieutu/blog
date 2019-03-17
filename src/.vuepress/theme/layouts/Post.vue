@@ -39,6 +39,10 @@ export default {
         > h1:first-child {
           margin-bottom: 0 !important
         }
+
+        > :first-child {
+          margin-top: 0 !important
+        }
       }
 
       &.header {
