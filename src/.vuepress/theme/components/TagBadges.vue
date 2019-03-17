@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     tagList() {
-      return this.tags || this.$page.frontmatter.tags;
+      return (this.tags || this.$page.frontmatter.tags).sort((a, b) => a.localeCompare(b));
     }
   }
 };
