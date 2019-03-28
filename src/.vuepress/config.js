@@ -17,6 +17,7 @@ module.exports = {
     'vuepress-plugin-reading-time',
     '@vuepress/last-updated',
     require('./plugins/lastCommit'),
+    require('./plugins/offlineStore'),
     ['@vuepress/container', {
       type: 'center',
       before: '<div style="display: flex; justify-content: center">',

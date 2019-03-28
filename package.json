@@ -1,19 +1,24 @@
 {
-    "name": "mathieutu.dev",
-    "version": "0.0.1",
-    "description": "Personal blog",
-    "author": "Mathieu TUDISCO",
-    "license": "MIT",
-    "devDependencies": {
-        "@vuepress/plugin-blog": "^1.0.0-alpha.44",
-        "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.44",
-        "@vuepress/plugin-pwa": "^1.0.0-alpha.44",
-        "date-fns": "^2.0.0-alpha.27",
-        "vuepress": "^1.0.0-alpha.44",
-        "vuepress-plugin-reading-time": "^0.1.1"
-    },
-    "scripts": {
-        "start": "vuepress dev src",
-        "build": "vuepress build src"
-    }
+  "name": "mathieutu.dev",
+  "version": "0.0.1",
+  "description": "Personal blog",
+  "author": "Mathieu TUDISCO",
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-blog": "^1.0.0-alpha.44",
+    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.44",
+    "@vuepress/plugin-pwa": "^1.0.0-alpha.44",
+    "axios": "^0.18.0",
+    "date-fns": "^2.0.0-alpha.27",
+    "ellipsize": "^0.1.0",
+    "express": "^4.16.4",
+    "serve-my-app": "^0.1.0",
+    "vuepress": "^1.0.0-alpha.44",
+    "vuepress-plugin-reading-time": "^0.1.1"
+  },
+  "scripts": {
+    "start": "vuepress dev src",
+    "build": "vuepress build src",
+    "check": "serve-my-app --src=src/.vuepress/dist --prod"
+  }
 }
