@@ -20,8 +20,8 @@
   "scripts": {
     "dev": "vuepress dev src",
     "notify": "osascript -e 'display notification \"Build done\" with title \"Vuepress\"'",
-    "build": "vuepress build src && yarn notify",
-    "watch": "nodemon -x \"yarn build\" -e js,md,vue,json --ignore '*/dist/*'",
+    "build": "vuepress build src",
+    "watch": "nodemon -x \"yarn build && yarn notify\" -e js,md,vue,json --ignore '*/dist/*'",
     "check": "serve-my-app --src=src/.vuepress/dist --prod"
   }
 }
