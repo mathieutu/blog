@@ -12,13 +12,16 @@
     "date-fns": "^2.0.0-alpha.27",
     "ellipsize": "^0.1.0",
     "express": "^4.16.4",
+    "nodemon": "^1.18.10",
     "serve-my-app": "^0.1.0",
     "vuepress": "^1.0.0-alpha.44",
     "vuepress-plugin-reading-time": "^0.1.1"
   },
   "scripts": {
-    "start": "vuepress dev src",
-    "build": "vuepress build src",
+    "dev": "vuepress dev src",
+    "notify": "osascript -e 'display notification \"Build done\" with title \"Vuepress\"'",
+    "build": "vuepress build src && yarn notify",
+    "watch": "nodemon -x \"yarn build\" -e js,md,vue,json --ignore '*/dist/*'",
     "check": "serve-my-app --src=src/.vuepress/dist --prod"
   }
 }
