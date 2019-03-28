@@ -11,8 +11,7 @@ module.exports = {
     }],
     ['@vuepress/pwa', {
       serviceWorker: true,
-      //popupComponent: 'MySWUpdatePopup',
-      updatePopup: true
+      updatePopup: true,
     }],
     'vuepress-plugin-reading-time',
     '@vuepress/last-updated',
@@ -27,6 +26,7 @@ module.exports = {
   head: [
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['link', { rel: 'shortcut icon', href: '/favicon.png' }],
+    ['meta', { name: 'theme-color', content: '#ded4d4' }],
   ],
   markdown: {
     linkify: true,
