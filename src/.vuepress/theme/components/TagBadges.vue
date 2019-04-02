@@ -43,5 +43,6 @@ export default {
   .tag .badge {
     background-color: var(--tag-badge-color) !important;
     white-space: nowrap;
+    margin-right: 5px;
   }
 </style>

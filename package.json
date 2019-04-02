@@ -5,9 +5,9 @@
   "author": "Mathieu TUDISCO",
   "license": "MIT",
   "devDependencies": {
-    "@vuepress/plugin-blog": "^1.0.0-alpha.44",
-    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.44",
-    "@vuepress/plugin-pwa": "^1.0.0-alpha.44",
+    "@vuepress/plugin-blog": "^1.0.0-alpha.46",
+    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.46",
+    "@vuepress/plugin-pwa": "^1.0.0-alpha.46",
     "axios": "^0.18.0",
     "date-fns": "^2.0.0-alpha.27",
     "ellipsize": "^0.1.0",
@@ -15,7 +15,8 @@
     "image-data-uri": "^2.0.0",
     "nodemon": "^1.18.10",
     "serve-my-app": "^0.1.0",
-    "vuepress": "^1.0.0-alpha.44",
+    "vuepress": "^1.0.0-alpha.46",
+    "vuepress-plugin-container": "^2.0.1",
     "vuepress-plugin-reading-time": "^0.1.1"
   },
   "scripts": {
