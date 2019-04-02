@@ -8,9 +8,7 @@ hints: [Stephanie, Walter, ux, ui, mobile, responsive]
 
 Ici, une illustration de <twl id="WalterStephanie">Stéphanie Walter</twl> que j'aime bien parce qu'il représente bien la différence de design entre desktop-first et mobile-first :
 
-::: center
-![Mobile first illustration](https://pbs.twimg.com/media/CGewrArXEAALg5N.jpg)
-:::
+<image-offline alt="Mobile first illustration" src="https://pbs.twimg.com/media/CGewrArXEAALg5N.jpg"/>
 
 On sait qu'à peu près [60%](https://www.stonetemple.com/mobile-vs-desktop-usage-study/) de la navigation web se fait sur mobile, et pourtant le 3/4 des sites n'est pas vraiment adapté.
 
