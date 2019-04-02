@@ -1,62 +1,93 @@
 <template>
-  <div class="tweet" ref="tweetWrapper">
-    <div v-if="tweet" class="styled-tweet" v-html="tweet" style="display: inline-block"/>
-    <div v-else v-html="defaultTweet" style="display: inline-block"/>
-    <div ref="slotWrapper" v-show="false">
-      <slot/>
-    </div>
+  <div class="tweet">
+    <div class="styled-tweet" v-html="tweet" style="display: inline-block"/>
   </div>
 </template>
 
 <script>
-const warningMessage = `<blockquote class="warning">☝️ This tweet can't be shown properly. This can be due to privacy blocking by your browser.
- The preview is made by a custom component, so I can guarantee you that no piece of information is leaking to anybody on this website.
- You can trustly and peacefully disable your privacy blocker during your navigation on the blog.</blockquote>`;
+import axios from 'axios';
+
+const replaceAllImagesToDataUri = async str => {
+  const promises = [];
+  const regex = /(https:)?(\/\/\S+twimg[^\s"]+)/g;
+
+  const imageDataUri = require('image-data-uri');
+
+  str.replace(regex, (match, https, url) => {
+    promises.push(imageDataUri.encodeFromURL('https:' + url));
+  });
+
+  const dataUris = await Promise.all(promises);
+
+  return str.replace(regex, () => dataUris.shift());
+};
 
 
 export default {
-  name: 'Tweet',
+  props: {
+    url: {
+      type: String,
+      required: true
+    },
+    media: {
+      type: Boolean,
+      default: true
+    },
+    parent: {
+      type: Boolean,
+      default: false
+    }
+  },
 
   data() {
     return {
-      tweet: null,
-      rawTweet: null,
+      tweet: 'Loading Tweet...',
     };
   },
+
+  async serverPrefetch() {
+    this.tweet = await this.getTweetHtml((await axios.get(this.apiUrl)).data);
+    this.$setInStore(this.storageKey, this.tweet);
+  },
+
+  mounted() {
+    this.tweet = this.$getInStore(this.storageKey);
+  },
+
   computed: {
     id() {
-      const matches = this.rawTweet
+      const matches = this.url
         .match(/(?:^|(?:https?:)?\/\/(?:www\.)?twitter\.com(?::\d+)?\/(?:#!\/)?[\w_]+\/status(?:es)?\/)(\d+)/i);
 
-      const id  = matches && matches[1];
+      const id = matches && matches[1];
 
-      return this.rawTweet.match('data-cards="hidden"') ? `${id}-c` : id
+      const options = [
+        !this.media && 'c',
+        !this.parent && 't',
+      ].filter(Boolean).join('');
+
+      return id + (options ? `-${options}` : '');
     },
-    defaultTweet() {
-      return this.rawTweet + warningMessage;
+
+    apiUrl() {
+      return `https://cdn.syndication.twimg.com/tweets.json?ids=${this.id}`;
+    },
+    storageKey() {
+      return `tweet-${this.id}`;
     }
   },
 
-  async mounted() {
-    this.rawTweet = this.$refs.slotWrapper.innerHTML;
-
-    if (!window.__twttr) {
-      window.__twttr = [];
-    }
-
-    const idSanitized = this.id.replace('-', '');
-
-    window.__twttr[`_${idSanitized}`] = (result) => {
-      this.tweet = result[this.id]
+  methods: {
+    async getTweetHtml(response) {
+      const html = response[this.id]
+        .replace(/href/g, 'target="_blank" rel="noopener noreferer" href')
         .replace(/data-src-2x/g, 'src')
-        .replace(/data-image="(\S+)"/g, 'src="$1.png"')
-        .replace(/href/g, 'target="_blank" rel="noopener noreferer" href');
-    };
+        .replace(/data-image="(\S+)"/g, 'src="$1?format=png&name=medium"');
 
-    var script = document.createElement('script');
-    script.src = `https://cdn.syndication.twimg.com/tweets.json?ids=${this.id}&callback=__twttr._${idSanitized}`;
-    this.$refs.tweetWrapper.appendChild(script);
+      return await replaceAllImagesToDataUri(html);
+    }
   },
+
 };
 
 </script>
@@ -96,7 +127,8 @@ export default {
       }
 
       img {
-        max-width: inherit !important;
+        // Problème avec /blog/2019/git-checkout-pr.html
+        // max-width: inherit !important;
       }
     }
 

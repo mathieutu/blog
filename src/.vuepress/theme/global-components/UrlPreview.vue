@@ -14,8 +14,8 @@
 <script>
 import CenterWrapper from '@theme/components/CenterWrapper.vue';
 
-import * as axios from 'axios';
-import * as ellipsize from 'ellipsize';
+import axios from 'axios';
+import ellipsize from 'ellipsize';
 
 export default {
   props: {
@@ -54,6 +54,7 @@ export default {
   mounted() {
     this.meta = this.$getInStore(this.storageKey);
   },
+
   computed: {
     imgUrlComputed() {
       return this.imgUrl || this.meta['og:image'] || this.meta['twitter:image'];
@@ -73,7 +74,6 @@ export default {
       return `meta-${this.url}`
     }
   }
-
 };
 
 </script>

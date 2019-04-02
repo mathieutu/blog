@@ -16,11 +16,10 @@ export default ({ Vue }) => {
     computed: {
       $store() {
         if (!this.$isServer) {
-          return window.STORE;
+          return window.STORE || {};
         }
 
         if (existsSync(STORAGE_PATH)) {
-          console.log({exists: existsSync(STORAGE_PATH)});
           return JSON.parse(readFileSync(STORAGE_PATH));
         }
 
