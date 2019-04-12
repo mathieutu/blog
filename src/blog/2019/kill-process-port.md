@@ -26,3 +26,8 @@ And for all plateforms, with Node (and npx) installed:
 ```bash
 npx fkill-cli :3001
 ```
+
+with a cli tool called fkill, that can kill anything by all the ways you want:
+
+<url-preview url="https://github.com/sindresorhus/fkill-cli" />
+
