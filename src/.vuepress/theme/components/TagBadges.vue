@@ -13,11 +13,7 @@ export default {
   props: {
     tags: {
       type: Array,
-      required: false,
-      /** Defaults to current page's tags */
-      default: function () {
-        return null;
-      }
+      default: null,
     },
   },
   computed: {
