@@ -1,6 +1,7 @@
 const spawn = require('cross-spawn');
 
 module.exports = () => ({
+  name: 'lastCommit',
   extendPageData($page) {
     $page.lastCommit = getGitLastCommit($page._filePath);
   }

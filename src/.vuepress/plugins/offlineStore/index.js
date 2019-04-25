@@ -10,6 +10,8 @@ module.exports = (options, ctx) => {
   const storagePath = resolve(ctx.outDir, 'storage.json');
 
   return {
+    name: 'localeStore',
+
     enhanceAppFiles: resolve(__dirname, 'enhanceAppFile.js'),
 
     generated(pages) {
