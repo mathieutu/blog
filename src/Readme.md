@@ -9,4 +9,4 @@ Initially industrial Arts et Métiers engineer, I'm now a pragmatic fullstack le
 
 I've made thousand of contributions during the past years in hundred of projects included Laravel, Symfony, and Vuejs.
 
-You can find more on my [Github profile](https://github.com/mathieutu), follow me on [Twitter](https://twitter.com/mathieutu), or read my last [blog posts](/blog).
+You can find more on my [Github profile](https://github.com/mathieutu), follow me on [Twitter](https://twitter.com/mathieutu), or read my last [blog posts](/blog/).
