@@ -68,7 +68,7 @@ export default {
     descriptionComputed() {
       const description = this.description || this.meta['description'] || this.meta['og:description'] || this.meta['twitter:description'];
 
-      return ellipsize(description, 200, { chars: [' ', '-', '.', ',', '!', '?', ';', ':'] });
+      return ellipsize(description, 200, { chars: [' ', '-', '.', ',', '!', '?', ';', ':'], truncate: false });
     },
     domainComputed() {
       return (new URL(this.url)).hostname.replace('www.', '');
@@ -180,7 +180,6 @@ export default {
   @media only screen and (min-width: 770px) {
     .url-preview__description {
       display: block;
-      display: -webkit-box
     }
   }
 

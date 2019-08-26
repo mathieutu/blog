@@ -1,6 +1,6 @@
 <template>
   <div id="tags" class="no-edit">
-    <div class="content">
+    <div class="theme-default-content">
       <TagBadges :tags="$tags.list.map(t => t.name).sort()"/>
     </div>
     <LayoutWithBio/>

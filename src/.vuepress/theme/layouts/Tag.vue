@@ -1,6 +1,6 @@
 <template>
   <div id="tag" class="no-edit">
-    <div class="content">
+    <div class="theme-default-content">
       <PageTitle :title="title"/>
       <Posts :filter="filterByTag"/>
     </div>
