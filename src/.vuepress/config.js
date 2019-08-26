@@ -2,13 +2,8 @@ module.exports = {
   title: 'Mathieu TUDISCO',
   description: 'Un blog',
   plugins: [
-    ['@vuepress/blog', {
-      postsDir: 'blog',
-      permalink: false
-    }],
-    ['@vuepress/medium-zoom', {
-      selector: '.post .content img'
-    }],
+    require('./plugins/blog'),
+    '@vuepress/medium-zoom',
     ['@vuepress/pwa', {
       serviceWorker: true,
       updatePopup: true,
@@ -43,13 +38,11 @@ module.exports = {
     nav: [
       { text: 'About', link: '/' },
       { text: 'Blog', link: '/blog/' },
-      {
-        text: 'Links', items: [
-          { text: 'Github', link: 'https://github.com/mathieutu' },
-          { text: 'Linkedin', link: 'https://www.linkedin.com/in/mathieutu/' },
-          { text: 'Twitter', link: 'https://twitter.com/mathieutu' },
-        ]
-      }
+      { text: 'Links', items: [
+        { text: 'Github', link: 'https://github.com/mathieutu' },
+        { text: 'Linkedin', link: 'https://www.linkedin.com/in/mathieutu/' },
+        { text: 'Twitter', link: 'https://twitter.com/mathieutu' },
+      ]}
     ]
   }
 };

@@ -1,11 +1,11 @@
 <template>
   <CenterWrapper>
     <a class="url-preview" :href="url" rel="noopener noreferer">
-      <div class="url-preview__image" v-if="imgUrlComputed" :style="{ backgroundImage: `url(${imgUrlComputed})`}"/>
+      <div class="url-preview__image" v-if="imgUrlComputed" :style="{ backgroundImage: `url(${imgUrlComputed})`}" />
       <div class="url-preview__text">
-        <span class="url-preview__title" v-text="titleComputed"/>
-        <span class="url-preview__description" v-text="descriptionComputed"/>
-        <span class="url-preview__link" v-text="domainComputed"/>
+        <span class="url-preview__title" v-text="titleComputed" />
+        <span class="url-preview__description" v-text="descriptionComputed" />
+        <span class="url-preview__link" v-text="domainComputed" />
       </div>
     </a>
   </CenterWrapper>
@@ -47,7 +47,10 @@ export default {
   },
 
   async serverPrefetch() {
-    this.meta = (await axios.get(`https://metatags.io/api/metadata?domain=${this.url}`)).data;
+    this.meta = (await axios.get(
+      `https://metatags.io/api/metadata?domain=${this.url}`,
+      { headers: { Referer: 'https://metatags.io/' } }
+    )).data;
     this.$setInStore(this.storageKey, this.meta);
   },
 
@@ -71,7 +74,7 @@ export default {
       return (new URL(this.url)).hostname.replace('www.', '');
     },
     storageKey() {
-      return `meta-${this.url}`
+      return `meta-${this.url}`;
     }
   }
 };

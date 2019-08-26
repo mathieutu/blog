@@ -1,6 +1,6 @@
 <template>
   <div class="post">
-    <div class="content header">
+    <div class="theme-default-content header">
       <PageTitle/>
     </div>
     <div class="meta wrapper">
@@ -32,7 +32,7 @@ export default {
 
 <style lang="stylus">
   .post {
-    .content {
+    .theme-default-content {
       max-width: var(--content-width)
 
       &:not(.custom) {

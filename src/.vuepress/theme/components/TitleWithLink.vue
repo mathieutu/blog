@@ -4,7 +4,23 @@
   </component>
 </template>
 <script>
-import slugiphy from '@vuepress/shared-utils/lib/slugify';
+import { remove } from 'diacritics';
+
+function slugify(str) {
+  return remove(str)
+  // Remove control characters
+    .replace(/[\u0000-\u001f]/g, '')
+    // Replace special characters
+    .replace(/[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g, '-')
+    // Remove continous separators
+    .replace(/-{2,}/g, '-')
+    // Remove prefixing and trailing separtors
+    .replace(/^-+|\-+$/g, '')
+    // ensure it doesn't start with a number (#121)
+    .replace(/^(\d)/, '_$1')
+    // lowercase
+    .toLowerCase();
+};
 
 export default {
   name: 'TitleWithLink',
@@ -20,7 +36,7 @@ export default {
   },
   computed: {
     slugTitle() {
-      return slugiphy(this.title);
+      return slugify(this.title);
     }
   }
 };

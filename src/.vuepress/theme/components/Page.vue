@@ -2,7 +2,7 @@
   <main class="page">
     <slot name="top"/>
 
-    <Content/>
+    <Content class="theme-default-content"/>
     <Hints/>
     <PageEdit/>
     <PageNav v-bind="{ sidebarItems }"/>
