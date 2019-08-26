@@ -6,7 +6,7 @@ tags: [git]
 hints: [github, gitlab]
 ---
 
-- Clone the repo from previous Lab using the `--mirror` option
+- Clone the repo from previous remote using the `--mirror` option
 ```bash
 git clone --mirror https://gitlab.com/mathieutu/repo myRepo
 ```
