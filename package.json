@@ -19,6 +19,7 @@
     "vuepress-plugin-reading-time": "^0.1.1"
   },
   "scripts": {
+    "write": "node src/.vuepress/newArticle.js",
     "dev": "vuepress dev src",
     "notify": "osascript -e 'display notification \"Build done\" with title \"Vuepress\"'",
     "build": "vuepress build src",

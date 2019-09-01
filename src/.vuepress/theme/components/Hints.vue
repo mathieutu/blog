@@ -1,5 +1,5 @@
 <template>
-  <div class="hints" v-if="hints">
+  <div class="hints" v-if="hints && hints.length">
     <p class="">You can find this page with theses search keywords:</p>
     <div class="list">
       <span v-for="(hint, index) in hints" :key="index">
