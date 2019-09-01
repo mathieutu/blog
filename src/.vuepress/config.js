@@ -4,10 +4,6 @@ module.exports = {
   plugins: [
     require('./plugins/blog'),
     '@vuepress/medium-zoom',
-    ['@vuepress/pwa', {
-      serviceWorker: true,
-      updatePopup: true,
-    }],
     'vuepress-plugin-reading-time',
     '@vuepress/last-updated',
     require('./plugins/lastCommit'),

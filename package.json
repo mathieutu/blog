@@ -6,14 +6,13 @@
   "license": "MIT",
   "devDependencies": {
     "@vuepress/plugin-medium-zoom": " ^1.0.3",
-    "@vuepress/plugin-pwa": "^1.0.3",
     "axios": "^0.19.0",
     "date-fns": "^2.0.1",
     "ellipsize": "^0.1.0",
     "express": "^4.17.1",
     "image-data-uri": "^2.0.1",
     "nodemon": "^1.19.1",
-    "serve-my-app": "^0.2.1",
+    "serve-my-app": "^0.3.0",
     "vuepress": "^1.0.3",
     "vuepress-plugin-container": "^2.0.2",
     "vuepress-plugin-reading-time": "^0.1.1"
