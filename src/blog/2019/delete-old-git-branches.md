@@ -6,9 +6,18 @@ tags: [git, tips]
 hints: [prune, purge, remove]
 ---
 
+To see what will be done :
+
+```sh
+git remote prune --dry-run origin
+git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'
+```
+
+If you're ok with that, and want to delete the branches:
+
 ```sh
 git remote prune origin
-git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -d
+git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D
 ```
 
 from:
