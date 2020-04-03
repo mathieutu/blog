@@ -3,7 +3,7 @@ title: Delete old git branches.
 lang: en-EN
 date: 2019-08-06 10:59
 tags: [git, tips]
-hints: []
+hints: [prune, purge, remove]
 ---
 
 ```sh
