@@ -1,11 +1,11 @@
 <template>
   <footer class="page-edit">
     <ExternalLink :href="editLink"> {{ editLinkText }}</ExternalLink>
-    <ExternalLink :href="lastCommitLink">Updated {{ lastUpdated }}</ExternalLink>
+    <ExternalLink :href="lastCommitLink" v-if="lastUpdated">Updated {{ lastUpdated }}</ExternalLink>
   </footer>
 </template>
 <script>
-import { formatDistance } from 'date-fns';
+import { formatDistanceToNow, parseISO, isValid } from 'date-fns';
 import { endingSlashRE, normalize, outboundRE } from '@vuepress/theme-default/util';
 import ExternalLink from '@theme/global-components/ExternalLink.vue';
 
@@ -14,11 +14,12 @@ export default {
   components: {ExternalLink},
   computed: {
     lastUpdated() {
-      const date = this.$page.lastUpdated || this.$page.frontmatter.date || null;
-      return formatDistance(new Date(date), new Date(), {
+      const date = parseISO(this.$page.lastUpdated || this.$page.frontmatter.date);
+
+      return isValid(date) ? formatDistanceToNow(date, {
         includeSeconds: true,
         addSuffix: true,
-      });
+      }) : null;
     },
 
     lastCommitLink() {
