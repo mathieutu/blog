@@ -11,10 +11,8 @@
         As a start you can follow me on
         <ExternalLink href="https://www.twitter.com/mathieutu">Twitter</ExternalLink>
         or want to find out more about
-        <router-link to="/">me</router-link>
-        or the
-        <router-link to="/blog/">blog</router-link>
-        .
+        <router-link to="/">me</router-link> or the
+        <router-link to="/blog/">blog</router-link>.
       </div>
     </div>
   </div>
