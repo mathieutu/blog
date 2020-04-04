@@ -5,14 +5,14 @@ module.exports = {
     require('./plugins/blog'),
     '@vuepress/medium-zoom',
     'vuepress-plugin-reading-time',
-    '@vuepress/last-updated',
+    ['@vuepress/last-updated', { transformer: timestamp => timestamp }],
     require('./plugins/lastCommit'),
     require('./plugins/offlineStore'),
     ['vuepress-plugin-container', {
       type: 'center',
       before: '<div style="display: flex; justify-content: center">',
       after: '</div>',
-    }]
+    }],
   ],
   head: [
     ['link', { rel: 'manifest', href: '/manifest.json' }],

@@ -14,7 +14,7 @@ export default {
   components: {ExternalLink},
   computed: {
     lastUpdated() {
-      const date = parseISO(this.$page.lastUpdated || this.$page.frontmatter.date);
+      const date = this.$page.lastUpdated || parseISO(this.$page.frontmatter.date);
 
       return isValid(date) ? formatDistanceToNow(date, {
         includeSeconds: true,
