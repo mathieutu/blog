@@ -3,8 +3,8 @@
     <a class="url-preview" :href="url" rel="noopener noreferer">
       <div class="url-preview__image" v-if="imgUrlComputed" :style="{ backgroundImage: `url(${imgUrlComputed})`}" />
       <div class="url-preview__text">
-        <span class="url-preview__title" v-text="titleComputed" />
-        <span class="url-preview__description" v-text="descriptionComputed" />
+        <span class="url-preview__title" v-if="titleComputed" v-text="titleComputed" />
+        <span class="url-preview__description" v-if="descriptionComputed" v-text="descriptionComputed" />
         <span class="url-preview__link" v-text="domainComputed" />
       </div>
     </a>
@@ -17,18 +17,20 @@ import CenterWrapper from '@theme/components/CenterWrapper.vue';
 import axios from 'axios';
 import ellipsize from 'ellipsize';
 
+const ifNotUndefined = (value, defaultValue = null) => value === undefined ? defaultValue : value
+
 export default {
   props: {
     imgUrl: {
-      type: String,
+      type: String | Boolean,
       required: false,
     },
     title: {
-      type: String,
+      type: String | Boolean,
       required: false,
     },
     description: {
-      type: String,
+      type: String | Boolean,
       required: false,
     },
     url: {
@@ -60,13 +62,13 @@ export default {
 
   computed: {
     imgUrlComputed() {
-      return this.imgUrl || this.meta['og:image'] || this.meta['twitter:image'];
+      return ifNotUndefined(this.imgUrl, this.meta['og:image'] || this.meta['twitter:image']);
     },
     titleComputed() {
-      return this.title || this.meta['title'] || this.meta['og:title'];
+      return ifNotUndefined(this.title, this.meta['title'] || this.meta['og:title']);
     },
     descriptionComputed() {
-      const description = this.description || this.meta['description'] || this.meta['og:description'] || this.meta['twitter:description'];
+      const description = ifNotUndefined(this.description, this.meta['description'] || this.meta['og:description'] || this.meta['twitter:description']);
 
       return ellipsize(description, 200, { chars: [' ', '-', '.', ',', '!', '?', ';', ':'], truncate: false });
     },
