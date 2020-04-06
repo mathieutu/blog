@@ -1,4 +1,7 @@
-const { path, datatypes: { isString } } = require('@vuepress/shared-utils');
+const { path } = require('@vuepress/shared-utils');
+
+const uniq = array => [...new Set(array)];
+const concat = arrayOfArrays => [].concat(...arrayOfArrays);
 
 module.exports = (options, ctx) => {
   const { themeAPI: { layoutComponentMap } } = ctx;
@@ -7,32 +10,35 @@ module.exports = (options, ctx) => {
   const getLayout = (name, fallback) => isLayoutExists(name) ? name : fallback;
   const isDirectChild = regularPath => path.parse(regularPath).dir === '/';
 
-  const TAGS_PATH = '/tag/';
+  const TAGS_PATH = '/tags/';
   const BLOG_PATH = '/blog/';
 
   const enhancers = [
     {
-      when: ({ regularPath }) => regularPath === TAGS_PATH,
-      frontmatter: { layout: getLayout('Tags', 'Page') }
+      condition: ({ regularPath }) => regularPath === TAGS_PATH,
+      frontmatter: { layout: getLayout('Tags', 'Page') },
+      type: 'tags',
     },
     {
-      when: ({ regularPath }) => regularPath.startsWith(TAGS_PATH),
-      frontmatter: { layout: getLayout('Tag', 'Page') }
+      condition: ({ regularPath }) => regularPath.startsWith(TAGS_PATH),
+      frontmatter: { layout: getLayout('Tag', 'Page') },
+      type: 'tag',
     },
     {
-      when: ({ regularPath }) => regularPath === '/',
-      frontmatter: { layout: getLayout('Layout') }
-    },
-    {
-      when: ({ regularPath }) => regularPath.startsWith(BLOG_PATH),
+      condition: ({ regularPath }) => regularPath.startsWith(BLOG_PATH),
       frontmatter: { layout: getLayout('Post', 'Page') },
-      data: { type: 'post' }
+      type: 'post',
     },
     {
-      when: ({ regularPath }) => isDirectChild(regularPath),
+      condition: ({ regularPath }) => regularPath === '/',
+      frontmatter: { layout: getLayout('Layout') },
+      type: 'page',
+    },
+    {
+      condition: ({ regularPath }) => isDirectChild(regularPath),
       frontmatter: { layout: getLayout('Page', 'Layout') },
-      data: { type: 'page' }
-    }
+      type: 'page',
+    },
   ];
 
   return {
@@ -41,18 +47,11 @@ module.exports = (options, ctx) => {
     /**
      * Modify page context according enhancers above.
      */
-    extendPageData(pageCtx) {
-      const { frontmatter: rawFrontmatter } = pageCtx;
-
-      enhancers.forEach(({ when, data = {}, frontmatter = {} }) => {
-        if (when(pageCtx)) {
-          Object.keys(frontmatter).forEach(key => {
-            if (!rawFrontmatter[key]) {
-              rawFrontmatter[key] = frontmatter[key];
-            }
-          });
-
-          Object.assign(pageCtx, data);
+    extendPageData(page) {
+      enhancers.forEach(({ condition, type, frontmatter }) => {
+        if (condition(page)) {
+          page.frontmatter = { ...frontmatter, ...page.frontmatter };
+          page.type = type;
         }
       });
     },
@@ -61,61 +60,21 @@ module.exports = (options, ctx) => {
      * Create tag pages.
      */
     async ready() {
-      const { pages } = ctx;
-      const tagMap = {};
-
-      const handleTag = (key, pageKey) => {
-        if (key) {
-          if (!tagMap[key]) {
-            tagMap[key] = {};
-            tagMap[key].path = `${TAGS_PATH}${key}.html`;
-            tagMap[key].pageKeys = [];
-          }
-
-          tagMap[key].pageKeys.push(pageKey);
-        }
-      };
-
-
-      pages.forEach(({ key, frontmatter: { tag, tags, } }) => {
-        if (isString(tag)) {
-          handleTag(tag, key);
-        }
-
-        if (Array.isArray(tags)) {
-          tags.forEach(tag => handleTag(tag, key));
-        }
-      });
-
-      ctx.tagMap = tagMap;
+      const tagsList = uniq(concat(ctx.pages.map(({ frontmatter: { tags = [] } }) => tags)));
 
       const extraPages = [
         {
           permalink: TAGS_PATH,
-          frontmatter: { title: 'Tags' }
+          title: 'Tags list',
         },
-        ...Object.keys(tagMap).map(tagName => ({
-          permalink: tagMap[tagName].path,
-          meta: { tagName },
-          frontmatter: { title: `${tagName} | Tag` }
+        ...tagsList.map(tagName => ({
+          frontmatter: { tagName },
+          permalink: `${TAGS_PATH}${tagName}.html`,
+          title: `Posts with ${tagName.toUpperCase()} tag`,
         })),
       ];
 
       await Promise.all(extraPages.map(page => ctx.addPage(page)));
     },
-
-    /**
-     * Generate tags metadata.
-     */
-    async clientDynamicModules() {
-      return [
-        {
-          name: 'tag.js',
-          content: `export default ${JSON.stringify(ctx.tagMap, null, 2)}`
-        },
-      ];
-    },
-
-    enhanceAppFiles: path.resolve(__dirname, 'enhanceAppFile.js')
   };
 };
