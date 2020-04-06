@@ -1,62 +1,48 @@
 <script>
 import SearchBox from '@SearchBox';
 
-const ucFirst = string => string/*.charAt(0).toUpperCase() + string.slice(1)*/;
-const sanitize = (string = '') => string.trim().toLowerCase();
+const normalize = (str) => str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const formatSuggestion = ({ title, path, key }) => ({ title, path, key });
 
 export default {
   extends: SearchBox,
   computed: {
+    hasTrailingSpace() {
+      return this.query.endsWith(' ');
+    },
+
+    queryWords() {
+      return this.query.length > 1 ? this.query.split(' ').filter(Boolean) : [];
+    },
+
     suggestions() {
-
-      const query = sanitize(this.query);
-
-      if (!query || query.length < 3) {
-        return;
+      return this.$site.pages.filter(this.filterPage).map(formatSuggestion);
+    },
+  },
+  methods: {
+    createRegexpPattern(word, index) {
+      if (this.queryWords.length === index + 1 && !this.hasTrailingSpace) {
+        // The last word - ok with the word being "startswith"-like
+        return `\\b${normalize(word)}`;
       }
 
-      const max = 10;
-
-      const suggestions = [];
-      this.$site.pages.forEach(({ title, path, key }) => {
-        if (suggestions.length <= max && sanitize(title).includes(query)) {
-          return suggestions.push({ title, path, key });
-        }
-      });
-
-      const shouldPush = key => suggestions.length <= max && suggestions.every(suggestion => suggestion.key !== key);
-
-      this.$tags.list.forEach(({ name, posts }) => {
-        if (sanitize(name).includes(query)) {
-          posts.forEach(({ title, key, path }) => {
-            if (shouldPush(key)) {
-              suggestions.push({
-                title: '[' + ucFirst(name) + ']',
-                path,
-                header: { title },
-                key,
-              });
-            }
-          });
-        }
-      });
-
-      this.$site.pages.forEach(({ title, path, key, frontmatter: { hints } }) => {
-        if (shouldPush(key)) {
-          const hint = hints && hints.find(hint => sanitize(hint).startsWith(query));
-          if (hint) {
-            return suggestions.push({
-              title: '/' + ucFirst(hint) + '/',
-              path,
-              header: { title },
-              key
-            });
-          }
-        }
-      });
-
-      return suggestions;
+      // Not the last word - expect the whole word exactly
+      return `\\b${normalize(word)}\\b`;
     },
-  }
+    filterPage({ title, path, frontmatter: { hints = [], tags = [] } }) {
+      return this.queryWords.length && this.queryWords.every((word, i) => {
+
+        const regexp = new RegExp(this.createRegexpPattern(word, i), 'ig');
+        const isMatching = (str) => normalize(String(str)).match(regexp);
+
+        return (
+          isMatching(title) ||
+          isMatching(path) ||
+          hints.some(isMatching) ||
+          tags.some(isMatching)
+        );
+      });
+    },
+  },
 };
 </script>
