@@ -12,7 +12,6 @@
     "express": "^4.17.1",
     "image-data-uri": "^2.0.1",
     "nodemon": "^2.0.2",
-    "serve-my-app": "^0.3.0",
     "vuepress": "^1.4.0",
     "vuepress-plugin-container": "^2.1.2",
     "vuepress-plugin-reading-time": "^0.1.1"
@@ -23,6 +22,6 @@
     "notify": "osascript -e 'display notification \"Build done\" with title \"Vuepress\"'",
     "build": "vuepress build src",
     "watch": "nodemon -x \"yarn build && yarn notify\" -e js,md,vue,json --ignore '*/dist/*'",
-    "check": "serve-my-app --src=src/.vuepress/dist --prod"
+    "check": "netlify dev"
   }
 }

@@ -1,0 +1,8 @@
+[build]
+  command = "yarn build"
+  framework="#static"
+  publish = "src/.vuepress/dist/"
+
+[dev]
+  framework="#static"
+  publish = "src/.vuepress/dist/"
