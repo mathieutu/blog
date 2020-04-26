@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const slugify = require('@vuepress/shared-utils/lib/slugify');
-const { writeFileSync } = require('fs');
-const { resolve } = require('path');
+const { writeFileSync, existsSync, mkdirSync } = require('fs');
+const { resolve, dirname } = require('path');
 
 const [, , title] = process.argv;
 
@@ -31,4 +31,11 @@ hints: []
 <image-offline src="https://pbs.twimg.com/media/D19GfnwWkAE3kEQ.jpg" alt="toString() changes" />
 `);
 
-writeFileSync(resolve(__dirname, `../blog/${now.getFullYear()}/${fileName}.md`), body);
+
+const path = resolve(__dirname, `../blog/${now.getFullYear()}/${fileName}.md`);
+
+if (!existsSync(dirname(path))){
+  mkdirSync(dirname(path));
+}
+
+writeFileSync(path, body);
