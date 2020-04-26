@@ -4,11 +4,14 @@ const slugify = require('@vuepress/shared-utils/lib/slugify');
 const { writeFileSync, existsSync, mkdirSync } = require('fs');
 const { resolve, dirname } = require('path');
 
-const [, , title] = process.argv;
+const [, , ...titleParts] = process.argv;
 
-if (!title) {
+
+if (!titleParts.length) {
   throw Error('The title is needed.');
 }
+
+const title = titleParts.join(' ')
 
 const add0 = number => number < 10 ? '0' + number : number;
 
