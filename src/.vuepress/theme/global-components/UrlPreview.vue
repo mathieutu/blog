@@ -17,7 +17,7 @@ import CenterWrapper from '@theme/components/CenterWrapper.vue';
 import axios from 'axios';
 import ellipsize from 'ellipsize';
 
-const ifNotUndefined = (value, defaultValue = null) => value === undefined ? defaultValue : value
+const ifNotUndefined = (value, defaultValue = null) => value === undefined ? defaultValue : value;
 
 export default {
   props: {
@@ -44,14 +44,14 @@ export default {
 
   data() {
     return {
-      meta: {}
+      meta: {},
     };
   },
 
   async serverPrefetch() {
     this.meta = (await axios.get(
       `https://metatags.io/api/metadata?domain=${this.url}`,
-      { headers: { Referer: 'https://metatags.io/' } }
+      { headers: { Referer: 'https://metatags.io/' } },
     )).data;
     this.$setInStore(this.storageKey, this.meta);
   },
@@ -77,8 +77,8 @@ export default {
     },
     storageKey() {
       return `meta-${this.url}`;
-    }
-  }
+    },
+  },
 };
 
 </script>
@@ -87,7 +87,6 @@ export default {
   .url-preview {
     text-decoration: none !important;
     color: inherit;
-    /*cursor: pointer;*/
     position: relative;
     display: block;
     background-color: #ffffff;
@@ -96,25 +95,22 @@ export default {
     border-color: #E1E8ED;
     border-width: 1px;
     font-size: 14px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    transition: background-color .15s ease-in-out, border-color .15s ease-in-out
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+    width: 100%;
+    max-width: 90vw;
+    overflow: hidden;
   }
 
   @media only screen and (min-width: 770px) {
     .url-preview {
-      width: 506px;
-      border-radius: 0.42857em;
-      overflow: hidden
+      max-width: 506px;
     }
   }
 
-  @media only screen and (min-width: 770px) {
     .url-preview:hover {
       background-color: #F5F8FA;
       border-color: rgba(136, 153, 166, 0.5)
     }
-  }
 
   .url-preview__image {
     height: 150px;
@@ -153,36 +149,26 @@ export default {
   .url-preview__title {
     display: block;
     margin: 0 0 0.15em;
-    font-size: 14px;
-    line-height: 18.375px;
+    font-size: 1em;
+    line-height: 1.3em;
     letter-spacing: normal;
-    overflow: hidden
+    overflow: hidden;
+    font-weight: bold;
   }
 
   @media only screen and (min-width: 770px) {
     .url-preview__title {
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 1em;
-      font-weight: bold;
-      line-height: 1.3em;
-      max-height: 1.3em
     }
   }
 
   .url-preview__description {
-    display: none;
     margin-top: 0.32333em;
     line-height: 1.3em;
     letter-spacing: normal;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-  }
-
-  @media only screen and (min-width: 770px) {
-    .url-preview__description {
-      display: block;
-    }
   }
 
   .url-preview__link {
