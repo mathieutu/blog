@@ -47,7 +47,7 @@ export default {
         }, {});
     },
     years() {
-      return Object.keys(this.posts).sort((a, b) => a - b);
+      return Object.keys(this.posts).sort((a, b) => b - a);
     }
   },
   methods: {

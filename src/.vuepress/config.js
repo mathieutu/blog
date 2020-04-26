@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Mathieu TUDISCO',
-  description: "@mathieutu's personal blog. Tips, and sharing about web development.",
+  description: "@mathieutu's personal blog.\n Tips, and sharing about web development.",
   plugins: [
     require('./plugins/blog'),
     '@vuepress/medium-zoom',
