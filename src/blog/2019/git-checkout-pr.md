@@ -16,9 +16,24 @@ function copr {
 copr 134
 ```
 
+Also, if you have the [hub](https://hub.github.com/) cli, you can do it directly with:
+```bash
+hub pr checkout 134
+```
+
+and commit and push directly you're change to the PR with
+```bash
+hub push
+```
+
 from:
 
-<Tweet url="https://twitter.com/EmmaWedekind/status/1107529228222910465" />
+<tweet url="https://twitter.com/EmmaWedekind/status/1107529228222910465" />
+
+and:
+
+<url-preview :imgUrl="false" url="https://jonathanchang.org/blog/pushing-to-a-pull-request-on-github/" />
+
 
 See more on [github documentation](https://help.github.com/en/articles/checking-out-pull-requests-locally).
 
