@@ -3,8 +3,8 @@ import type * as types from '@/lib/types'
 import { PageHead } from './PageHead'
 import styles from './styles.module.css'
 
-export function Page404({ site, pageId, error }: types.PageProps) {
-  const title = site?.name || 'Notion Page Not Found'
+export function Page404({ site, error }: types.PageProps) {
+  const title = site?.name || 'Page Not Found'
 
   return (
     <>
@@ -12,18 +12,9 @@ export function Page404({ site, pageId, error }: types.PageProps) {
 
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1>Notion Page Not Found</h1>
+          <h1>Page Not Found</h1>
 
-          {error ? (
-            <p>{error.message}</p>
-          ) : (
-            pageId && (
-              <p>
-                Make sure that Notion page &quot;{pageId}&quot; is publicly
-                accessible.
-              </p>
-            )
-          )}
+          {error ? <p>{error.message}</p> : null}
 
           <img
             src='/404.png'
