@@ -406,6 +406,10 @@
 
 /* CUSTOM MATHIEU */
 
+.notion-bookmark {
+  border-radius: 0.375rem;
+}
+
 .notion-page-icon-hero.notion-page-icon-image {
   left: 0;
   box-shadow: none;
