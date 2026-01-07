@@ -295,8 +295,7 @@
   );
 }
 
-.notion-blue_background,
-.notion-gray_background {
+.notion-blue_background {
   /* light blue */
   background-image: linear-gradient(
     119deg,
@@ -307,14 +306,35 @@
   );
 }
 
-.notion-red_background,
-.notion-orange_background {
+.notion-gray_background {
+  /* light blue-gray */
+  background-image: linear-gradient(
+    119deg,
+    var(--bg-color),
+    #d3d7df 10.5%,
+    #d4d8e0 85.29%,
+    var(--bg-color)
+  );
+}
+
+.notion-red_background {
   /* light red */
   background-image: linear-gradient(
     119deg,
     var(--bg-color),
-    #f5c4ff 10.5%,
-    #e7a8fc 85.29%,
+    #ff9e9e 10.5%,
+    #ffb3b3 85.29%,
+    var(--bg-color)
+  );
+}
+
+.notion-orange_background {
+  /* light orange */
+  background-image: linear-gradient(
+    119deg,
+    var(--bg-color),
+    #ffc28e 10.5%,
+    #ffd39e 85.29%,
     var(--bg-color)
   );
 }
@@ -343,7 +363,7 @@
 
 .dark-mode {
   .notion-yellow_background {
-    /* light yellow */
+    /* dark yellow */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
@@ -354,7 +374,7 @@
   }
   
   .notion-purple_background {
-    /* light pink */
+    /* dark purple */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
@@ -365,7 +385,7 @@
   }
 
   .notion-pink_background {
-    /* light pink */
+    /* dark pink */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
@@ -375,9 +395,8 @@
     );
   }
 
-  .notion-blue_background,
-  .notion-gray_background {
-    /* light blue */
+  .notion-blue_background {
+    /* dark blue */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
@@ -387,9 +406,19 @@
     );
   }
 
-  .notion-red_background,
-  .notion-orange_background {
-    /* light red */
+  .notion-gray_background {
+    /* dark blue-gray */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #6b7280 10.5%,
+      #7d8391 85.29%,
+      var(--bg-color)
+    );
+  }
+
+  .notion-red_background {
+    /* dark red */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
@@ -399,8 +428,20 @@
     );
   }
 
+
+  .notion-orange_background {
+    /* dark orange */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #b35a1d 10.5%,
+      #c76a0f 85.29%,
+      var(--bg-color)
+    );
+  }
+
   .notion-teal_background {
-    /* light green */
+    /* dark green */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
@@ -411,7 +452,7 @@
   }
 
   .notion-brown_background {
-    /* dark blue */
+    /* dark brown */
     background-image: linear-gradient(
       119deg,
       var(--bg-color),
