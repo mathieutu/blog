@@ -101,7 +101,8 @@ export default async function OGImage(
             backgroundColor: '#fff',
             padding: 24,
             alignItems: 'center',
-            textAlign: 'center'
+            textAlign: 'center',
+            borderRadius: 24
           }}
         >
           {pageInfo.detail && (
@@ -142,7 +143,9 @@ export default async function OGImage(
             src={pageInfo.authorImage}
             style={{
               width: '100%',
-              height: '100%'
+              height: '100%',
+              borderRadius: '100%',
+              objectFit: 'cover'
               // transform: 'scale(1.04)'
             }}
           />
@@ -210,7 +213,7 @@ export async function getNotionPageInfo({
 
   const imageBlockUrl = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover,
+    (block as PageBlock).format?.page_cover,
     block
   )
   const imageFallbackUrl = mapImageUrl(libConfig.defaultPageCover, block)
@@ -248,8 +251,8 @@ export async function getNotionPageInfo({
   const date =
     isBlogPost && datePublished
       ? `${datePublished.toLocaleString('en-US', {
-          month: 'long'
-        })} ${datePublished.getFullYear()}`
+        month: 'long'
+      })} ${datePublished.getFullYear()}`
       : undefined
   const detail = date || author || libConfig.domain
 
