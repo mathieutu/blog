@@ -273,7 +273,17 @@
   );
 }
 
-.notion-purple_background,
+.notion-purple_background {
+  /* light pink */
+  background-image: linear-gradient(
+    119deg,
+    var(--bg-color),
+    #b982fc 10.5%,
+    #c39eff 85.29%,
+    var(--bg-color)
+  );
+}
+
 .notion-pink_background {
   /* light pink */
   background-image: linear-gradient(
@@ -325,14 +335,95 @@
   background-image: linear-gradient(
     119deg,
     var(--bg-color),
-    #96b8ec 10.5%,
-    #a6c3f0 85.29%,
+    #be9143 10.5%,
+    #c9840d 85.29%,
     var(--bg-color)
   );
 }
 
+.dark-mode {
+  .notion-yellow_background {
+    /* light yellow */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #908323 10.5%,
+      #9d800b 85.29%,
+      var(--bg-color)
+    );
+  }
+  
+  .notion-purple_background {
+    /* light pink */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #7f048f 10.5%,
+      #9c0b97 85.29%,
+      var(--bg-color)
+    );
+  }
+
+  .notion-pink_background {
+    /* light pink */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #b358ba 10.5%,
+      #b456bc 85.29%,
+      var(--bg-color)
+    );
+  }
+
+  .notion-blue_background,
+  .notion-gray_background {
+    /* light blue */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #487984 10.5%,
+      #7ba5b2 85.29%,
+      var(--bg-color)
+    );
+  }
+
+  .notion-red_background,
+  .notion-orange_background {
+    /* light red */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #893636 10.5%,
+      #a63141 85.29%,
+      var(--bg-color)
+    );
+  }
+
+  .notion-teal_background {
+    /* light green */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #4f6b32 10.5%,
+      #3e6e12 85.29%,
+      var(--bg-color)
+    );
+  }
+
+  .notion-brown_background {
+    /* dark blue */
+    background-image: linear-gradient(
+      119deg,
+      var(--bg-color),
+      #774122 10.5%,
+      #866039 85.29%,
+      var(--bg-color)
+    );
+  }
+}
+
 /* disable highlighting in dark mode */
-.dark-mode .notion-red_background,
+/* .dark-mode .notion-red_background,
 .dark-mode .notion-pink_background,
 .dark-mode .notion-blue_background,
 .dark-mode .notion-purple_background,
@@ -345,7 +436,7 @@
   margin: 0;
   border-radius: 0;
   background: none !important;
-}
+} */
 
 /* if you don't want rounded page icon images, remove this */
 .notion-page-icon-hero.notion-page-icon-image {
