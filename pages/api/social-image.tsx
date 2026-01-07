@@ -87,8 +87,8 @@ export default async function OGImage(
             display: 'flex',
             flexDirection: 'column',
             border: '16px solid rgba(0,0,0,0.3)',
-            borderRadius: 8,
-            zIndex: '1'
+            borderRadius: 32,
+            zIndex: 1
           }}
         >
           <div
@@ -100,14 +100,11 @@ export default async function OGImage(
               justifyContent: 'space-around',
               backgroundColor: '#fff',
               padding: 24,
+              borderRadius: 16,
               alignItems: 'center',
               textAlign: 'center'
             }}
           >
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0 }}>{pageInfo.detail}</div>
-            )}
-
             <div
               style={{
                 fontSize: 70,
@@ -135,7 +132,7 @@ export default async function OGImage(
               height: 128,
               width: 128,
               display: 'flex',
-              borderRadius: '50%',
+              borderRadius: '100%',
               border: '4px solid #fff',
               zIndex: '5'
             }}
@@ -144,7 +141,9 @@ export default async function OGImage(
               src={pageInfo.authorImage}
               style={{
                 width: '100%',
-                height: '100%'
+                height: '100%',
+                borderRadius: '100%',
+                objectFit: 'cover',
                 // transform: 'scale(1.04)'
               }}
             />
@@ -213,7 +212,7 @@ export async function getNotionPageInfo({
 
   const imageBlockUrl = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover,
+    (block as PageBlock).format?.page_cover,
     block
   )
   const imageFallbackUrl = mapImageUrl(libConfig.defaultPageCover, block)
@@ -251,8 +250,8 @@ export async function getNotionPageInfo({
   const date =
     isBlogPost && datePublished
       ? `${datePublished.toLocaleString('en-US', {
-          month: 'long'
-        })} ${datePublished.getFullYear()}`
+        month: 'long'
+      })} ${datePublished.getFullYear()}`
       : undefined
   const detail = date || author || libConfig.domain
 
