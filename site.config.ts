@@ -67,5 +67,5 @@ export default siteConfig({
     // }
   ],
   // Search does not work 🤷
-  isSearchEnabled: false,
+  isSearchEnabled: false
 })

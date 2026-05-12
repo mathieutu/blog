@@ -3,7 +3,7 @@ import {
   type SearchParams,
   type SearchResults
 } from 'notion-types'
-import { mergeRecordMaps } from 'notion-utils'
+import { getBlockValue, getPageProperty, mergeRecordMaps } from 'notion-utils'
 import pMap from 'p-map'
 import pMemoize from 'p-memoize'
 
@@ -42,6 +42,52 @@ const getNavigationLinkPages = pMemoize(
   }
 )
 
+function filterPrivatePages(recordMap: ExtendedRecordMap): void {
+  const privatePageIds = new Set(
+    Object.keys(recordMap.block).filter((id) => {
+      const block = getBlockValue(recordMap.block[id])
+      if (
+        !block ||
+        block.type !== 'page' ||
+        block.parent_table !== 'collection'
+      ) {
+        return false
+      }
+      return (
+        getPageProperty<boolean | null>('Public', block, recordMap) === false
+      )
+    })
+  )
+
+  if (!privatePageIds.size) return
+
+  for (const id of privatePageIds) {
+    delete recordMap.block[id]
+  }
+
+  for (const collectionId of Object.keys(recordMap.collection_query ?? {})) {
+    for (const viewId of Object.keys(
+      recordMap.collection_query[collectionId]!
+    )) {
+      const result = recordMap.collection_query[collectionId]![viewId]!
+      if (result.blockIds) {
+        result.blockIds = result.blockIds.filter(
+          (id) => !privatePageIds.has(id)
+        )
+      }
+      if (result.groupResults) {
+        for (const group of result.groupResults) {
+          if (group.blockIds) {
+            group.blockIds = group.blockIds.filter(
+              (id) => !privatePageIds.has(id)
+            )
+          }
+        }
+      }
+    }
+  }
+}
+
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   let recordMap = await notion.getPage(pageId)
 
@@ -59,6 +105,8 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
       )
     }
   }
+
+  filterPrivatePages(recordMap)
 
   if (isPreviewImageSupportEnabled) {
     const previewImageMap = await getPreviewImageMap(recordMap)

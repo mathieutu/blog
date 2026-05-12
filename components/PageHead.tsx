@@ -100,7 +100,11 @@ export function PageHead({
 
       <meta property='og:title' content={title} />
       <meta name='twitter:title' content={title} />
-      <title>{title && site?.name && title !== site.name ? `${title} - ${site.name}` : title}</title>
+      <title>
+        {title && site?.name && title !== site.name
+          ? `${title} - ${site.name}`
+          : title}
+      </title>
 
       {/* Better SEO for the blog posts */}
       {isBlogPost && (
