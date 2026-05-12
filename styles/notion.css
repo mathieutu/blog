@@ -554,7 +554,19 @@
 /* CUSTOM MATHIEU */
 
 .notion-collection-card-cover {
-  display: none;
+  height: 120px;
+  box-shadow: none;
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+
+.notion-collection-card-cover img {
+  border-radius: 0%;
+}
+
+.notion-collection-card {
+  border: 1px solid var(--fg-color-1);
+  border-radius: 0.375rem;
 }
 
 .notion-bookmark {
