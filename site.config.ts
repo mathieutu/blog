@@ -65,5 +65,7 @@ export default siteConfig({
     //   title: 'Contact',
     //   pageId: '1b537b615e2281029da0c537cf3fc8ae'
     // }
-  ]
+  ],
+  // Search does not work 🤷
+  isSearchEnabled: false,
 })
