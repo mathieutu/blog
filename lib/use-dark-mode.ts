@@ -8,7 +8,10 @@ const noopStorage = {
 export function useDarkMode() {
   const darkMode = useDarkModeImpl(false, {
     classNameDark: 'dark-mode',
-    storageProvider: typeof window !== 'undefined' ? window.localStorage as unknown as WindowLocalStorage : noopStorage
+    storageProvider:
+      typeof window !== 'undefined'
+        ? (window.localStorage as unknown as WindowLocalStorage)
+        : noopStorage
   })
 
   return {

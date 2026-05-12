@@ -19,12 +19,7 @@ import { useRouter } from 'next/router'
 import { posthog } from 'posthog-js'
 import * as React from 'react'
 
-import {
-  fathomConfig,
-  fathomId,
-  posthogConfig,
-  posthogId
-} from '@/lib/config'
+import { fathomConfig, fathomId, posthogConfig, posthogId } from '@/lib/config'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()

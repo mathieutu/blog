@@ -9,7 +9,7 @@ export default siteConfig({
   rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: 'mathieutu.dev',
+  name: '@mathieutu',
   domain: 'mathieutu.dev',
   author: 'Mathieu TUDISCO',
 
@@ -50,20 +50,20 @@ export default siteConfig({
 
   // whether to use the default notion navigation style or a custom one with links to
   // important pages. To use `navigationLinks`, set `navigationStyle` to `custom`.
-  navigationStyle: 'default'
-  // navigationStyle: 'custom',
-  // navigationLinks: [
-  //   {
-  //     title: 'About',
-  //     pageId: '1b537b615e2281e1858ae3c63440d413'
-  //   },
-  //   // {
-  //   //   title: 'Blog',
-  //   //   pageId: '1b537b615e2281e1858ae3c63440d413'
-  //   // },
-  //   {
-  //     title: 'Contact',
-  //     pageId: '1b537b615e2281029da0c537cf3fc8ae'
-  //   }
-  // ]
+  // navigationStyle: 'default'
+  navigationStyle: 'custom',
+  navigationLinks: [
+    // {
+    //   title: 'About',
+    //   pageId: '1b537b615e2281e1858ae3c63440d413'
+    // },
+    {
+      title: 'Blog',
+      pageId: '1b537b615e228099ab9dc6312a2ef0af'
+    }
+    // {
+    //   title: 'Contact',
+    //   pageId: '1b537b615e2281029da0c537cf3fc8ae'
+    // }
+  ]
 })

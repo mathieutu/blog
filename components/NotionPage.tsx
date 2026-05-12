@@ -1,15 +1,10 @@
 import cs from 'classnames'
 import dynamic from 'next/dynamic'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { type PageBlock } from 'notion-types'
-import {
-  formatDate,
-  getBlockTitle,
-  getBlockValue,
-  getPageProperty
-} from 'notion-utils'
+import { getBlockTitle, getBlockValue, getPageProperty } from 'notion-utils'
 import * as React from 'react'
 import BodyClassName from 'react-body-classname'
 import {
@@ -144,60 +139,16 @@ function Tweet({ id }: { id: string }) {
   )
 }
 
-const propertyLastEditedTimeValue = (
-  { block, pageHeader }: any,
-  defaultFn: () => React.ReactNode
-) => {
-  if (pageHeader && block?.last_edited_time) {
-    return `Last updated ${formatDate(block?.last_edited_time, {
-      month: 'long'
-    })}`
-  }
-
-  return defaultFn()
-}
-
-const propertyDateValue = (
-  { data, schema, pageHeader }: any,
-  defaultFn: () => React.ReactNode
-) => {
-  if (pageHeader && schema?.name?.toLowerCase() === 'published') {
-    const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date
-
-    if (publishDate) {
-      return `${formatDate(publishDate, {
-        month: 'long'
-      })}`
-    }
-  }
-
-  return defaultFn()
-}
-
-const propertyTextValue = (
-  { schema, pageHeader }: any,
-  defaultFn: () => React.ReactNode
-) => {
-  if (pageHeader && schema?.name?.toLowerCase() === 'author') {
-    return <b>{defaultFn()}</b>
-  }
-
-  return defaultFn()
-}
-
 const notionRendererComponents: Partial<NotionComponents> = {
-  nextLegacyImage: Image,
   nextLink: Link,
+  nextImage: Image,
   Code,
   Collection,
   Equation,
   Pdf,
   Modal,
   Tweet,
-  Header: NotionPageHeader,
-  propertyLastEditedTimeValue,
-  propertyTextValue,
-  propertyDateValue
+  Header: NotionPageHeader
 }
 
 export function NotionPage({
@@ -230,7 +181,8 @@ export function NotionPage({
   const isBlogPost =
     block?.type === 'page' && block?.parent_table === 'collection'
 
-  const showTableOfContents = !!isBlogPost
+  // mathieutu: Not great style.
+  const showTableOfContents = !!isBlogPost && false
   const minTableOfContentsItems = 3
 
   const pageAside = React.useMemo(
