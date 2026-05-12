@@ -107,6 +107,8 @@
 
 .notion-collection-card-body {
   padding: 10px;
+  justify-content: space-between;
+  flex: 1;
 }
 
 /* only target safari */
