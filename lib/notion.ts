@@ -5,7 +5,6 @@ import {
 } from 'notion-types'
 import { getBlockValue, getPageProperty, mergeRecordMaps } from 'notion-utils'
 import pMap from 'p-map'
-import pMemoize from 'p-memoize'
 
 import {
   isPreviewImageSupportEnabled,
@@ -16,8 +15,7 @@ import { getTweetsMap } from './get-tweets'
 import { notion } from './notion-api'
 import { getPreviewImageMap } from './preview-images'
 
-const getNavigationLinkPages = pMemoize(
-  async (): Promise<ExtendedRecordMap[]> => {
+const getNavigationLinkPages = async (): Promise<ExtendedRecordMap[]> => {
     const navigationLinkPageIds = (navigationLinks || [])
       .map((link) => link?.pageId)
       .filter(Boolean)
@@ -39,8 +37,7 @@ const getNavigationLinkPages = pMemoize(
     }
 
     return []
-  }
-)
+}
 
 function filterPrivatePages(recordMap: ExtendedRecordMap): void {
   const privatePageIds = new Set(

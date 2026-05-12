@@ -4,7 +4,6 @@ import {
   getPageProperty,
   uuidToId
 } from 'notion-utils'
-import pMemoize from 'p-memoize'
 
 import type * as types from './types'
 import * as config from './config'
@@ -26,9 +25,7 @@ export async function getSiteMap(): Promise<types.SiteMap> {
   } as types.SiteMap
 }
 
-const getAllPages = pMemoize(getAllPagesImpl, {
-  cacheKey: (...args) => JSON.stringify(args)
-})
+const getAllPages = getAllPagesImpl
 
 const getPage = async (pageId: string, opts?: any) => {
   console.log('\nnotion getPage', uuidToId(pageId))
