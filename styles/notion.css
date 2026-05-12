@@ -598,7 +598,7 @@
   .notion-page-cover-wrapper span,
   .notion-page-cover-wrapper img {
     border-radius: 0;
-    min-height: 50vh !important;
+    min-height: 40vh !important;
   }
 
 .notion-asset-wrapper-image img {
