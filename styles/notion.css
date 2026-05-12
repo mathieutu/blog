@@ -576,7 +576,7 @@
 .notion-page-icon-hero {
   left: 0 !important;
   box-shadow: none !important;
-  margin-left: 0 !important;
+  margin-left: 5px !important;
 }
 
 .notion-page-icon-hero.notion-page-icon-image {
