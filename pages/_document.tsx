@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel='icon'
-            href="data:image/svg+xml,<svg xmlns=' http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='90' text-anchor='middle' x='50'>👷</text></svg>"
+            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='90' text-anchor='middle' x='50'>👷</text></svg>"
           />
         </Head>
 

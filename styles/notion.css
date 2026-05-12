@@ -564,11 +564,15 @@
 .notion-page-icon-hero {
   left: 0 !important;
   box-shadow: none !important;
-  outline: 4px white solid !important;
   margin-left: 0 !important;
 }
 
-.notion-page-icon-hero.notion-page-icon-image span, .notion-page-icon-hero.notion-page-icon-image img {
+.notion-page-icon-hero.notion-page-icon-image {
+  outline: 4px white solid !important;
+  border-radius: 50% !important;
+}
+
+.notion-page-icon-hero.notion-page-icon-image img {
   border-radius: 50% !important;
 }
 
