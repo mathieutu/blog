@@ -44,6 +44,8 @@ const Code = dynamic(() =>
       // @ts-expect-error Ignore prisma types
       import('prismjs/components/prism-markup.js'),
       // @ts-expect-error Ignore prisma types
+      import('prismjs/components/prism-php.js'),
+      // @ts-expect-error Ignore prisma types
       import('prismjs/components/prism-bash.js'),
       // @ts-expect-error Ignore prisma types
       import('prismjs/components/prism-c.js'),
