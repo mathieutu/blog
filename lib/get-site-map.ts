@@ -1,3 +1,7 @@
+import * as fs from 'fs'
+import * as os from 'os'
+import * as path from 'path'
+
 import {
   getAllPagesInSpace,
   getBlockValue,
@@ -13,16 +17,43 @@ import { notion } from './notion-api'
 
 const uuid = !!includeNotionIdInUrls
 
+const CACHE_FILE = path.join(os.tmpdir(), 'notion-site-map.json')
+const CACHE_TTL_MS = 5 * 60 * 1000 // 5 minutes
+
+let siteMapCache: types.SiteMap | null = null
+
 export async function getSiteMap(): Promise<types.SiteMap> {
+  if (siteMapCache) return siteMapCache
+
+  try {
+    const stat = fs.statSync(CACHE_FILE)
+    if (Date.now() - stat.mtimeMs < CACHE_TTL_MS) {
+      siteMapCache = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8')) as types.SiteMap
+      return siteMapCache!
+    }
+  } catch {
+    // cache absent ou expiré
+  }
+
   const partialSiteMap = await getAllPages(
     config.rootNotionPageId,
     config.rootNotionSpaceId ?? undefined
   )
 
-  return {
+  siteMapCache = {
     site: config.site,
     ...partialSiteMap
   } as types.SiteMap
+
+  try {
+    const tmp = `${CACHE_FILE}.tmp`
+    fs.writeFileSync(tmp, JSON.stringify(siteMapCache))
+    fs.renameSync(tmp, CACHE_FILE)
+  } catch {
+    // ignore les erreurs d'écriture du cache
+  }
+
+  return siteMapCache
 }
 
 const getAllPages = getAllPagesImpl
@@ -30,7 +61,7 @@ const getAllPages = getAllPagesImpl
 const getPage = async (pageId: string, opts?: any) => {
   console.log('\nnotion getPage', uuidToId(pageId))
   return notion.getPage(pageId, {
-    kyOptions: {
+    ofetchOptions: {
       timeout: 30_000
     },
     ...opts
