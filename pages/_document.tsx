@@ -1,7 +1,12 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 export default class MyDocument extends Document {
   override render() {
+    const analyticsEnabled = process.env.NODE_ENV === 'production'
+      && (!process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NEXT_PUBLIC_VERCEL_ENV === 'production')
+
+
     return (
       <Html lang='en'>
         <Head>
@@ -55,6 +60,20 @@ export default class MyDocument extends Document {
           <Main />
 
           <NextScript />
+          {/* Privacy-friendly analytics by Plausible */}
+          {analyticsEnabled && <Script async src="https://e.mathieutu.dev/js/pa-ih6Cy8vo-tFt6VNhsxa_f.js" />}
+          {analyticsEnabled && (
+            <Script
+              id="next-plausible-init"
+              dangerouslySetInnerHTML={{
+                __html: `
+          window.plausible=window.plausible||function(){(plausible.q = plausible.q || []).push(arguments)},plausible.init=plausible.init||function(i){plausible.o = i || {}};
+          plausible.init()
+          `,
+              }}
+            />
+          )}
+
         </body>
       </Html>
     )
