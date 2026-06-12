@@ -17,6 +17,7 @@ import { useSearchParam } from 'react-use'
 
 import type * as types from '@/lib/types'
 import * as config from '@/lib/config'
+import { ClockIcon } from '@/lib/icons/clock'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
 import { searchNotion } from '@/lib/search-notion'
@@ -148,7 +149,20 @@ const notionRendererComponents: Partial<NotionComponents> = {
   Pdf,
   Modal,
   Tweet,
-  Header: NotionPageHeader
+  Header: NotionPageHeader,
+  propertyLastEditedTimeValue: (_props, defaultValueFn) => (
+    <span
+      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3em' }}
+    >
+      <span
+        title='last updated at'
+        style={{ display: 'inline-flex', alignItems: 'center', opacity: 0.6 }}
+      >
+        <ClockIcon />
+      </span>
+      {defaultValueFn()}
+    </span>
+  )
 }
 
 export function NotionPage({

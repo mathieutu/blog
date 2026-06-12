@@ -9,7 +9,7 @@ export function FooterImpl() {
     <footer className={styles.footer}>
       <div>{/* Just to push the copyright notice on right */}</div>
       <div className={styles.copyright}>
-        {new Date().getFullYear()} {config.author} CC-BY-SA
+        CC-BY-SA {new Date().getFullYear()} {config.author}
       </div>
     </footer>
   )

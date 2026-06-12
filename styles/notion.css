@@ -553,6 +553,10 @@
   align-items: center;
 }
 
+.notion-gallery-grid {
+  grid-auto-rows: auto;
+}
+
 /* CUSTOM MATHIEU */
 
 .notion-collection-card-cover {
